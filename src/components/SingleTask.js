@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useEffect } from "react";
 const Singletask = styled.div`
   margin: 1rem 0 1rem 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 30vw;
   height: 8vh;
+  .text {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-left: 5vw;
+  }
   background-color: #e9dac1;
   h3 {
     font-family: "Titillium Web", sans-serif;
@@ -17,36 +24,48 @@ const Singletask = styled.div`
     padding: 0;
     margin: 0;
   }
+  input {
+    margin-right: 5vw;
+  }
 `;
 export const SingleTask = (props) => {
-  var today = new Date();
-  var timeCurr = parseInt(today.getHours()) * 60 + parseInt(today.getMinutes());
-  var time = props.due.split(":");
-  var hour = time[0];
-  if (hour === "00") {
-    hour = 24;
-  }
-  var min = time[1];
-  var inputTime = parseInt(hour) * 60 + parseInt(min);
-  var totalTime = inputTime - timeCurr;
+  const taskTimeString = props.due;
+  const taskTimeNumber = props.due.split(":");
+  const taskHour = taskTimeNumber[0];
+  const taskMinutes = taskTimeNumber[1];
+  const inputTasktime = parseInt(taskHour) * 60 + parseInt(taskMinutes);
+  const [displayTime, setDisplaytime] = useState(inputTasktime);
+  const MINUTES_MS = 60000;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      var today = new Date();
+      var timeCurr =
+        parseInt(today.getHours()) * 60 + parseInt(today.getMinutes());
 
-  if (totalTime > 0) {
+      var totalTime = inputTasktime - timeCurr;
+      setDisplaytime(totalTime);
+    }, MINUTES_MS);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (displayTime > 0) {
     return (
       <Singletask>
-        <div>
+        <div className="text">
           <h3>Task : {props.data}</h3>
-          <p>Due at : {props.due}</p>
+          <p>Due at : {taskTimeString}</p>
         </div>
         <input type="checkbox" name="" id="" />
       </Singletask>
     );
   } else {
-    totalTime = -1 * totalTime;
-    var mins = totalTime % 60;
-    var hours = parseInt(totalTime / 60);
+    var newTime = -1 * displayTime;
+    var mins = newTime % 60;
+    var hours = parseInt(newTime / 60);
     return (
       <Singletask>
-        <div>
+        <div className="text">
           <h3>Task : {props.data}</h3>
           <p>Late by : {hours + " hour and " + mins + " minutes"}</p>
         </div>
