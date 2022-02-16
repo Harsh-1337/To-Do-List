@@ -8,6 +8,9 @@ const Singletask = styled.div`
   align-items: center;
   width: 30vw;
   height: 8vh;
+  .sub {
+    color: #525252;
+  }
   .text {
     display: flex;
     justify-content: flex-start;
@@ -74,7 +77,10 @@ export const SingleTask = (props) => {
     return (
       <Singletask>
         <div className="text">
-          <h3>Task : {props.data}</h3>
+          <h3>
+            <span className="sub">Task : </span>
+            {props.data}
+          </h3>
           <p>Due at : {taskTimeString}</p>
         </div>
         <input type="checkbox" onClick={handleClick} name="" id="" />

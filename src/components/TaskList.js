@@ -3,6 +3,7 @@ import styled from "styled-components";
 import SingleTask from "./SingleTask";
 const MyList = styled.div`
   padding-top: 2rem;
+  margin-bottom: 2rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
