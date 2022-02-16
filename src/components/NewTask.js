@@ -6,19 +6,20 @@ import TaskList from "./TaskList";
 const Wrapper = styled.form`
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  //flex-direction: column;
   align-items: center;
   label {
     font-size: 1.5rem;
     font-family: "Roboto", sans-serif;
-    padding: 0 0 1rem 0;
+    margin-right: 0.8vw;
   }
+
   input {
     width: 20vw;
     height: 4vh;
     border: none;
     background-color: #f7ecde;
-    margin-right: 2rem;
+    margin-right: 1.6vw;
   }
   button {
     position: relative;
@@ -30,6 +31,28 @@ const Wrapper = styled.form`
     height: 36px;
     cursor: pointer;
     outline: none;
+  }
+  @media (max-width: 1300px) {
+    input {
+      width: 30vw;
+      height: 4.5vh;
+    }
+  }
+  @media (max-width: 1100px) {
+    label {
+      font-size: 1rem;
+    }
+  }
+  @media (max-width: 550px) {
+    input {
+      width: 70vw;
+      height: 4.5vh;
+      margin-bottom: 1.3vh;
+    }
+    label {
+      margin-bottom: 1.3vh;
+    }
+    flex-direction: column;
   }
 `;
 export const NewTask = () => {
@@ -58,7 +81,7 @@ export const NewTask = () => {
     var min = time1[1];
     var inputTime = parseInt(hour) * 60 + parseInt(min);
     var totalTime = inputTime - timeCurr;
-    if (totalTime > 0) {
+    if (totalTime > 0 && task !== "") {
       setTasks((prevNote) => {
         let obj = {
           newTask: task,
@@ -69,7 +92,12 @@ export const NewTask = () => {
         return [...prevNote, obj];
       });
     } else {
-      alert("Invalid time");
+      if (task === "") {
+        alert("Please Input Task");
+      } else {
+        alert("Invalid time");
+        setTime("");
+      }
     }
     e.preventDefault();
   };
@@ -83,26 +111,13 @@ export const NewTask = () => {
   return (
     <>
       <Wrapper onSubmit={handleSubmit}>
-        <div>
-          <label>Enter New Task :</label>
-          <div>
-            <input
-              name="task"
-              type="text"
-              value={task}
-              onChange={handleChange}
-            />
-            <input
-              name="time"
-              type="time"
-              value={time}
-              onChange={handleChange}
-            />
-            <button type="submit">
-              <AddIcon />
-            </button>
-          </div>
-        </div>
+        <label>Enter New Task :</label>
+        <input name="task" type="text" value={task} onChange={handleChange} />
+        <label>Enter Time:</label>
+        <input name="time" type="time" value={time} onChange={handleChange} />
+        <button type="submit">
+          <AddIcon />
+        </button>
       </Wrapper>
       <TaskList list={tasks} deleteOne={deleteTask} />
     </>

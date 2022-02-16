@@ -27,6 +27,24 @@ const Singletask = styled.div`
   input {
     margin-right: 5vw;
   }
+  @media (max-width: 1300px) {
+    width: 50vw;
+    height: 10vh;
+  }
+  @media (max-width: 700px) {
+    width: 70vw;
+    height: 11vh;
+  }
+  @media (max-width: 410px) {
+    width: 80vw;
+    height: 12vh;
+    h3 {
+      font-size: 1.1rem;
+    }
+    p {
+      font-size: 0.9rem;
+    }
+  }
 `;
 export const SingleTask = (props) => {
   const taskTimeString = props.due;
