@@ -113,7 +113,7 @@ export const NewTask = () => {
       <Wrapper onSubmit={handleSubmit}>
         <label>Enter New Task :</label>
         <input name="task" type="text" value={task} onChange={handleChange} />
-        <label>Enter Time:</label>
+        <label>Enter Time :</label>
         <input name="time" type="time" value={time} onChange={handleChange} />
         <button type="submit">
           <AddIcon />

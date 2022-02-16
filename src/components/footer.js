@@ -10,6 +10,7 @@ const MyFooter = styled.div`
   align-items: center;
   background-color: #e9dac1;
   bottom: 0;
+  position: fixed;
   width: 100%;
 
   .contacts {
