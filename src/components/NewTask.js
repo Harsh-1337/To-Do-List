@@ -33,7 +33,6 @@ const Wrapper = styled.form`
   }
 `;
 export const NewTask = () => {
-  const [num, setNum] = useState(0);
   const [task, setTask] = useState("");
   const [time, setTime] = useState("");
   const [tasks, setTasks] = useState([]);
@@ -48,9 +47,6 @@ export const NewTask = () => {
     }
   };
   const handleSubmit = (e) => {
-    setNum((prevNum) => {
-      return prevNum + 1;
-    });
     var today = new Date();
     var timeCurr =
       parseInt(today.getHours()) * 60 + parseInt(today.getMinutes());
@@ -68,6 +64,8 @@ export const NewTask = () => {
           newTask: task,
           newTime: time,
         };
+        setTask("");
+        setTime("");
         return [...prevNote, obj];
       });
     } else {
@@ -75,21 +73,38 @@ export const NewTask = () => {
     }
     e.preventDefault();
   };
+  const deleteTask = (id) => {
+    setTasks((prevList) => {
+      return prevList.filter((task, index) => {
+        return index !== id;
+      });
+    });
+  };
   return (
     <>
       <Wrapper onSubmit={handleSubmit}>
         <div>
           <label>Enter New Task :</label>
           <div>
-            <input name="task" type="text" onChange={handleChange} />
-            <input name="time" type="time" onChange={handleChange} />
+            <input
+              name="task"
+              type="text"
+              value={task}
+              onChange={handleChange}
+            />
+            <input
+              name="time"
+              type="time"
+              value={time}
+              onChange={handleChange}
+            />
             <button type="submit">
               <AddIcon />
             </button>
           </div>
         </div>
       </Wrapper>
-      <TaskList list={tasks} taskNumber={num} />
+      <TaskList list={tasks} deleteOne={deleteTask} />
     </>
   );
 };

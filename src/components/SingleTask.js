@@ -48,7 +48,10 @@ export const SingleTask = (props) => {
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const handleClick = (e) => {
+    props.onDelete(props.id);
+    e.preventDefault();
+  };
   if (displayTime > 0) {
     return (
       <Singletask>
@@ -56,7 +59,7 @@ export const SingleTask = (props) => {
           <h3>Task : {props.data}</h3>
           <p>Due at : {taskTimeString}</p>
         </div>
-        <input type="checkbox" name="" id="" />
+        <input type="checkbox" onClick={handleClick} name="" id="" />
       </Singletask>
     );
   } else {
@@ -69,7 +72,7 @@ export const SingleTask = (props) => {
           <h3>Task : {props.data}</h3>
           <p>Late by : {hours + " hour and " + mins + " minutes"}</p>
         </div>
-        <input type="checkbox" name="" id="" />
+        <input type="checkbox" onClick={handleClick} name="" id="" />
       </Singletask>
     );
   }

@@ -9,12 +9,19 @@ const MyList = styled.div`
   align-items: center;
 `;
 export const TaskList = (props) => {
-  const List = props.list;
+  let List = props.list;
+
   return (
     <MyList>
       {List.map((item, index) => {
         return (
-          <SingleTask data={item.newTask} due={item.newTime} key={index} />
+          <SingleTask
+            data={item.newTask}
+            due={item.newTime}
+            onDelete={props.deleteOne}
+            key={index}
+            id={index}
+          />
         );
       })}
     </MyList>
