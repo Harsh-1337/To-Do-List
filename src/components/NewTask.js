@@ -10,15 +10,17 @@ const Wrapper = styled.form`
   align-items: center;
   label {
     font-size: 1.5rem;
-    font-family: "Roboto", sans-serif;
+    font-family: "Montserrat", sans-serif;
     margin-right: 0.8vw;
   }
 
   input {
+    text-align: center;
     width: 20vw;
     height: 4vh;
     border: none;
-    background-color: #f7ecde;
+    //color: white;
+    background-color: #b5deff;
     margin-right: 1.6vw;
   }
   button {
@@ -112,7 +114,13 @@ export const NewTask = () => {
     <>
       <Wrapper onSubmit={handleSubmit}>
         <label>Enter New Task :</label>
-        <input name="task" type="text" value={task} onChange={handleChange} />
+        <input
+          name="task"
+          type="text"
+          autocomplete="off"
+          value={task}
+          onChange={handleChange}
+        />
         <label>Enter Time :</label>
         <input name="time" type="time" value={time} onChange={handleChange} />
         <button type="submit">

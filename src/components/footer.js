@@ -4,20 +4,24 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 const MyFooter = styled.div`
+  @import url("https://fonts.googleapis.com/css?family=Montserrat:400|Inconsolata:400");
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: #e9dac1;
+  background-color: #1c6dd0;
   bottom: 0;
   position: fixed;
   width: 100%;
-
+  h4 {
+    color: #fed1ef;
+    font-family: "Montserrat", sans-serif;
+  }
   .contacts {
     display: flex;
     justify-content: space-between;
     a {
-      color: #54bab9;
+      color: #fed1ef;
       margin: 0 1vw 0 1vw;
       text-decoration: none;
     }
@@ -26,7 +30,7 @@ const MyFooter = styled.div`
 export const Footer = () => {
   return (
     <MyFooter>
-      <h4>Made by : Harsh</h4>
+      <h4>Made by : Harsh Anand Jha</h4>
       <div className="contacts">
         <a
           target="_blank"

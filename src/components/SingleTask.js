@@ -8,6 +8,13 @@ const Singletask = styled.div`
   align-items: center;
   width: 30vw;
   height: 8vh;
+  box-shadow: 10px 10px #b980f0;
+  transition: width 0.5s, height 1s;
+  :hover {
+    box-shadow: 15px 15px #fed1ef;
+    width: 35vw;
+    height: 10vh;
+  }
   .sub {
     color: #525252;
   }
@@ -17,7 +24,7 @@ const Singletask = styled.div`
     flex-direction: column;
     padding-left: 5vw;
   }
-  background-color: #e9dac1;
+  background-color: #b5deff;
   h3 {
     font-family: "Titillium Web", sans-serif;
     padding: 0;
@@ -28,19 +35,35 @@ const Singletask = styled.div`
     margin: 0;
   }
   input {
+    cursor: pointer;
     margin-right: 5vw;
   }
   @media (max-width: 1300px) {
     width: 50vw;
     height: 10vh;
+    :hover {
+      box-shadow: 15px 15px #1c6dd0;
+      width: 55vw;
+      height: 12vh;
+    }
   }
   @media (max-width: 700px) {
     width: 70vw;
     height: 11vh;
+    :hover {
+      box-shadow: 15px 15px #1c6dd0;
+      width: 75vw;
+      height: 14vh;
+    }
   }
   @media (max-width: 410px) {
     width: 80vw;
     height: 12vh;
+    :hover {
+      box-shadow: 15px 15px #1c6dd0;
+      width: 85vw;
+      height: 15vh;
+    }
     h3 {
       font-size: 1.1rem;
     }
