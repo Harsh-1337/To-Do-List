@@ -7,15 +7,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  // h1 {
-  //   margin-top: 0;
-  //   padding-top: 4vh;
-  //   padding-bottom: 2vh;
-  //   text-align: center;
-  //   font-family: "Montserrat", sans-serif;
-  //   font-size: 5rem;
-  //   color: #fed1ef;
-  // }
+
   .threeD {
     padding-bottom: 0;
     text-align: center;
