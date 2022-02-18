@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
@@ -58,9 +59,18 @@ const Wrapper = styled.form`
   }
 `;
 export const NewTask = () => {
+  const isMounted = useRef(false);
+  const getLocalStorage = () => {
+    let taskList = localStorage.getItem("myTasKList");
+    if (taskList) {
+      return JSON.parse(localStorage.getItem("myTasKList"));
+    } else return [];
+  };
   const [task, setTask] = useState("");
   const [time, setTime] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    return getLocalStorage();
+  });
   const handleChange = (e) => {
     let name = e.target.name;
     if (name === "task") {
@@ -110,6 +120,14 @@ export const NewTask = () => {
       });
     });
   };
+
+  useEffect(() => {
+    if (isMounted.current) {
+      localStorage.setItem("myTasKList", JSON.stringify(tasks));
+    } else {
+      isMounted.current = true;
+    }
+  }, [tasks]);
   return (
     <>
       <Wrapper onSubmit={handleSubmit}>
@@ -117,7 +135,7 @@ export const NewTask = () => {
         <input
           name="task"
           type="text"
-          autocomplete="off"
+          autoComplete="off"
           value={task}
           onChange={handleChange}
         />
