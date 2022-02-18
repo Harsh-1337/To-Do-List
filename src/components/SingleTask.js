@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useEffect } from "react";
+import sound from "../sounds/mixkit-alert-bells-echo-765.wav";
+import swal from "sweetalert";
 const Singletask = styled.div`
   margin: 1rem 0 1rem 0;
   display: flex;
@@ -87,12 +89,18 @@ export const SingleTask = (props) => {
         parseInt(today.getHours()) * 60 + parseInt(today.getMinutes());
 
       var totalTime = inputTasktime - timeCurr;
+      if (totalTime <= 0 && totalTime > -1) {
+        swal(`${props.data} is Due`, ``, `info`);
+        const audio = new Audio(sound);
+        audio.play();
+      }
       setDisplaytime(totalTime);
     }, MINUTES_MS);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleClick = (e) => {
+    swal(`Task Completed`, ``, `success`);
     props.onDelete(props.id);
     e.preventDefault();
   };
